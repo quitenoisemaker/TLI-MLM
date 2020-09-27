@@ -1,0 +1,38 @@
+
+DirectoryIndex index.php
+
+ServerSignature EMail
+SetEnv SERVER_ADMIN osolomon@mentapps.com
+
+ErrorDocument 404 /page-not-found
+ErrorDocument 500 /page-not-found
+ErrorDocument 403 /page-not-found
+ErrorDocument 400 /page-not-found
+ErrorDocument 401 /page-not-found
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*?)/?$ $1.php
+#RewriteRule ^(.*)$ $1.php
+#RewriteRule ^([a-z]+)\/?$ $1.php [NC]
+
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html
+#RewriteRule ^([a-z]+)\/?$ $1.html [NC]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]+\ /([^/]+/)*[^.#?\ ]+\.php([#?][^\ ]*)?\ HTTP/
+RewriteRule ^(([^/]+/)*[^.]+)\.php http://google.com [R=301,L]
+
+
+RewriteRule ^/?vendor/confirm-account/(.*)$ vendor/confirm-account.php?verify=$1 [QSA]
+</IfModule>
+
+
+
+
+
